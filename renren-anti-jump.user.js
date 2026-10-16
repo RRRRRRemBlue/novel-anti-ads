@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         人人热书 · 防跳转纯净阅读
 // @namespace    https://local.antijump/
-// @version      1.1.3
-// @description  拦截小说站的点击劫持、强制跳转、弹窗广告、外站 iframe 与跳 App 广告，只留下正文和翻页按钮。悬浮球面板里可直接管理保护站点。
+// @version      1.0.0
+// @description  拦截小说站的点击劫持、强制跳转、弹窗广告与外站 iframe，只留下正文和翻页按钮，让你安安静静看完一章。
 // @author       WorkBuddy
-// @match        *://*/*
+// @match        *://renrenreshu.com/*
+// @match        *://*.renrenreshu.com/*
 // @run-at       document-start
 // @noframes
-// @grant        GM_getValue
-// @grant        GM_setValue
+// @grant        none
 // ==/UserScript==
 
 /*
@@ -18,25 +18,14 @@
  *   ④ iframe / meta refresh 自动跳。所以只要守住"出站"这一个关口，
  *   不管它用什么写法都能挡住，站点改版也不会失效。
  *
- * 换书站或加镜像站：点右下角盾牌 → 面板「保护站点」里直接添加域名（保存在本地，无需改代码）。
- *
- * 说明：脚本会在所有网站加载（@match 全站），但只有「保护站点」列表里的域名
- * 才会真正启用防护；其他网站会在 1 毫秒内静默退出，不做任何事。
- *
- * 站点列表存放在脚本管理器的全局存储（GM_getValue/GM_setValue）里，所有网站
- * 共享同一份——所以在 A 站面板里添加的域名，在 B 站同样生效。
- * （浏览器自带的 localStorage 是按网站隔离的，做不到跨站共享，因此不用它。）
+ * 换书站或加镜像站：只改下面第 0 节的 SITES 数组。
  */
 
 (function () {
   'use strict';
 
-  try {
-
   /* ============================================================
-     0. 站点清单
-        内置站在 SITES 里；用户自己添加的站存在脚本管理器的全局存储中
-        （所有网站共享，盾牌面板里管理），两者合并生效。
+     0. 站点清单（改了这里就等于换了保护范围）
         只写域名，不要写 http:// 或 www.
      ============================================================ */
   const SITES = [
@@ -44,71 +33,16 @@
     // 'renrenreshu.net',
     // 'renrenshu.cc',
   ];
-  const SITES_KEY = 'AJ_SITES_V1';
-
-  // ---------- 站点列表存储（跨网站共享） ----------
-  // localStorage 按网站隔离（A 站存的 B 站读不到），所以用脚本管理器的
-  // 全局存储（GM_getValue/GM_setValue）。没有 GM 环境时回退 localStorage；
-  // 首次运行会把旧版存在 localStorage 里的数据自动迁移到全局存储。
-  function parseSiteList(txt) {
-    const out = [];
-    if (!txt) return out;
-    try {
-      const v = JSON.parse(txt);
-      if (Array.isArray(v)) {
-        for (let j = 0; j < v.length; j++) {
-          const s = v[j];
-          if (typeof s === 'string' && s && out.indexOf(s) < 0) out.push(s);
-        }
-      }
-    } catch (e) { }
-    return out;
-  }
-  function readStoredSites() {
-    let gm = '';
-    try { if (typeof GM_getValue === 'function') gm = String(GM_getValue(SITES_KEY, '') || ''); } catch (e) { }
-    if (gm) return parseSiteList(gm); // 已有全局数据：以它为准（删除过的站点不会从旧 local 数据里"复活"）
-    let local = '';
-    try { local = localStorage.getItem(SITES_KEY) || ''; } catch (e) { }
-    return parseSiteList(local);      // 全局存储为空：从本域 localStorage 做一次性迁移
-  }
-  let userSites = readStoredSites();
-  function saveUserSites() {
-    const txt = JSON.stringify(userSites);
-    try { if (typeof GM_setValue === 'function') GM_setValue(SITES_KEY, txt); } catch (e) { }
-    try { localStorage.setItem(SITES_KEY, txt); } catch (e) { }
-  }
-  // 首次迁移：全局存储还没有数据时，把从 localStorage 迁移来的结果落盘
-  try {
-    if (typeof GM_setValue === 'function' && typeof GM_getValue === 'function' && !GM_getValue(SITES_KEY, '') && userSites.length) {
-      GM_setValue(SITES_KEY, JSON.stringify(userSites));
-    }
-  } catch (e) { }
-  function allSites() {
-    const out = SITES.slice();
-    for (let i = 0; i < userSites.length; i++) if (out.indexOf(userSites[i]) < 0) out.push(userSites[i]);
-    return out;
-  }
-
-  // 把用户输入的网址整理成纯域名；不合法返回 null
-  function normSite(v) {
-    v = String(v || '').trim().toLowerCase();
-    if (!v) return null;
-    v = v.replace(/^[a-z][a-z0-9+.-]*:\/\//, '').replace(/^www\./, '').split(/[\/?#]/)[0].replace(/:\d+$/, '').trim();
-    if (!v || v.length > 253 || !/^[a-z0-9.-]+$/.test(v)) return null;
-    if (v.indexOf('.') < 1 || v.charAt(v.length - 1) === '.' || v.indexOf('..') !== -1) return null;
-    return v;
-  }
 
   const HOST = location.hostname.toLowerCase();
-  const ACTIVE = allSites().some(function (s) { return HOST === s || HOST.endsWith('.' + s); });
+  const ACTIVE = SITES.some(function (s) { return HOST === s || HOST.endsWith('.' + s); });
   if (!ACTIVE) return; // 不是目标站点，脚本什么都不做
 
   /* ============================================================
      1. 配置（存在浏览器本地，关掉浏览器也记得住）
      ============================================================ */
   const KEY = 'AJ_CFG_V1';
-  const DEFAULTS = { on: true, guard: true, ads: true, tip: true, ball: true, scheme: true };
+  const DEFAULTS = { on: true, guard: true, ads: true, tip: true, ball: true };
   let cfg = Object.assign({}, DEFAULTS);
   try { Object.assign(cfg, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { }
   function saveCfg() { try { localStorage.setItem(KEY, JSON.stringify(cfg)); } catch (e) { } }
@@ -118,41 +52,23 @@
      ============================================================ */
   function hostAllowed(h) {
     h = String(h).toLowerCase();
-    const list = allSites();
-    return h === HOST || list.some(function (s) { return h === s || h.endsWith('.' + s); });
+    return h === HOST || SITES.some(function (s) { return h === s || h.endsWith('.' + s); });
   }
 
   // 返回 'inner'    = 站内 / 相对地址 / javascript: 之类，放行
-  //      'external' = 站外 http(s)，拦截
-  //      'app'      = 跳 App 的外部协议（market://、taobao:// 等），受 scheme 开关控制
-  const SAFE_SCHEMES = /^(javascript|mailto|tel|sms|about|blob|data|filesystem|chrome|file):/i;
+  //      'external' = 站外，拦截
   function classify(raw) {
     if (raw === undefined || raw === null || raw === '') return 'inner';
     raw = String(raw).trim();
-    if (raw.charAt(0) === '#' || SAFE_SCHEMES.test(raw)) return 'inner';
-    const m = raw.match(/^([a-z][a-z0-9+.-]*):/i);
-    if (m) {
-      const sc = m[1].toLowerCase();
-      if (sc !== 'http' && sc !== 'https') return 'app';
-    }
+    if (/^(javascript|mailto|tel|sms|about|blob|data|#)/i.test(raw)) return 'inner';
     let u;
     try { u = new URL(raw, location.href); } catch (e) { return 'inner'; }
-    if (u.protocol !== 'http:' && u.protocol !== 'https:') return 'app';
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') return 'inner';
     return hostAllowed(u.hostname) ? 'inner' : 'external';
   }
 
-  // 拦截判定：站外一律拦；跳 App 按开关
-  function shouldBlock(raw) {
-    const c = classify(raw);
-    if (c === 'external') return true;
-    return c === 'app' && cfg.scheme;
-  }
-
   function hostOf(raw) {
-    const s = String(raw);
-    const m = s.match(/^\s*([a-z][a-z0-9+.-]*):/i);
-    if (m && !/^https?$/i.test(m[1])) return m[1].toLowerCase() + '://';
-    try { return new URL(raw, location.href).hostname; } catch (e) { return s.slice(0, 40); }
+    try { return new URL(raw, location.href).hostname; } catch (e) { return String(raw).slice(0, 40); }
   }
 
   function esc(s) {
@@ -169,7 +85,6 @@
   let toastFn = function () { };
 
   function record(kind, url) {
-    if (classify(url) === 'app') kind = kind + '·App';
     const h = hostOf(url);
     const k = kind + '|' + h;
     const now = Date.now();
@@ -205,7 +120,7 @@
         if (!cfg.on) return;
         const url = e.destination ? e.destination.url : '';
         if (!url) return;
-        if (shouldBlock(url) && e.cancelable !== false) {
+        if (classify(url) === 'external' && e.cancelable !== false) {
           e.preventDefault();      // 导航直接被取消，页面纹丝不动
           record(e.formData ? '表单跳转' : '跳转', url);
         }
@@ -217,7 +132,7 @@
   try {
     const rawOpen = window.open;
     window.open = function (url) {
-      if (cfg.on && url && shouldBlock(url)) {
+      if (cfg.on && url && classify(url) === 'external') {
         record('弹窗', url);
         return null;
       }
@@ -235,7 +150,7 @@
         if (!proto[fn]) return;
         const orig = proto[fn];
         proto[fn] = function (url) {
-          if (cfg.on && url && shouldBlock(url)) {
+          if (cfg.on && url && classify(url) === 'external') {
             record('跳转', url);
             return;
           }
@@ -260,9 +175,9 @@
       const attrs = el.attributes;
       for (let i = 0; i < attrs.length; i++) {
         const a = attrs[i];
-        if (a.name.length > 2 && a.name.charCodeAt(0) === 111 && a.name.charCodeAt(1) === 110 && /[a-z][a-z0-9+.-]*:\/\//i.test(a.value)) {
-          const urls = a.value.match(/[a-z][a-z0-9+.-]*:\/\/[^\s'"()<>]+/gi) || [];
-          for (let j = 0; j < urls.length; j++) if (shouldBlock(urls[j])) return urls[j];
+        if (a.name.length > 2 && a.name.charCodeAt(0) === 111 && a.name.charCodeAt(1) === 110 && /https?:\/\//i.test(a.value)) {
+          const urls = a.value.match(/https?:\/\/[^\s'"()<>]+/gi) || [];
+          for (let j = 0; j < urls.length; j++) if (classify(urls[j]) === 'external') return urls[j];
         }
       }
       el = el.parentElement;
@@ -283,7 +198,7 @@
         const marked = el.getAttribute('data-aj-blocked');
         if (marked) { stopEvent(e); record('点击', marked); return; }
         const raw = el.getAttribute('href');
-        if (shouldBlock(raw)) { stopEvent(e); record('点击', raw); return; }
+        if (classify(raw) === 'external') { stopEvent(e); record('点击', raw); return; }
       }
     }
 
@@ -320,7 +235,6 @@
   const AD_RE = /(^|[^a-z])(ad|ads|adv|advert|advertise|banner|guanggao|gg|tuiguang|popup|floatad)([^a-z]|$)/i;
 
   function looksLikeAd(el) {
-    if (el.id && el.id.indexOf('aj-') === 0) return false; // 本脚本自己的元素，永不清理
     const sig = (el.id || '') + ' ' + (typeof el.className === 'string' ? el.className : '');
     if (!AD_RE.test(sig)) return false;
     if ((el.innerText || '').trim().length > 200) return false; // 有正文，别动
@@ -338,7 +252,7 @@
     for (let i = 0; i < iframes.length; i++) {
       const f = iframes[i];
       const src = f.getAttribute('src') || f.getAttribute('data-src') || '';
-      if (src && shouldBlock(src)) f.remove();
+      if (src && classify(src) === 'external') f.remove();
     }
 
     // 7.2 广告容器（按 id / class 关键词，且不含正文）
@@ -374,7 +288,7 @@
       const a = list[i];
       a.setAttribute('data-aj-checked', '1');
       const raw = a.getAttribute('href');
-      if (shouldBlock(raw)) {
+      if (classify(raw) === 'external') {
         a.setAttribute('data-aj-blocked', a.href);
         a.setAttribute('href', 'javascript:void(0)');
         a.removeAttribute('target');
@@ -386,9 +300,7 @@
     const list = document.querySelectorAll('a[data-aj-blocked]');
     for (let i = 0; i < list.length; i++) {
       const a = list[i];
-      const orig = a.getAttribute('data-aj-blocked');
-      if (cfg.on && shouldBlock(orig)) continue; // 按当前配置仍应拦截的保持冻结
-      a.setAttribute('href', orig);
+      a.setAttribute('href', a.getAttribute('data-aj-blocked'));
       a.removeAttribute('data-aj-blocked');
       a.removeAttribute('data-aj-checked');
     }
@@ -404,7 +316,7 @@
       if (!/^refresh$/i.test(m.getAttribute('http-equiv') || '')) continue;
       const content = m.getAttribute('content') || '';
       const url = content.replace(/^\s*[\d.]+\s*;\s*url\s*=\s*/i, '').replace(/^['"]|['"]$/g, '');
-      if (url && shouldBlock(url)) {
+      if (url && classify(url) === 'external') {
         m.remove();
         record('meta', url);
       }
@@ -466,16 +378,6 @@
     '.row .h{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
     '.row .t{color:#6f757f;flex:none}',
     '.empty{color:#6f757f;font-size:12px}',
-    '.sites{border-top:1px solid #2a2d33;margin-top:8px;padding-top:8px}',
-    '.sites-t{font-size:12px;color:#9aa0aa;margin-bottom:2px}',
-    '.site-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:3px 0;font-size:12.5px}',
-    '.site-row .tag{font-size:10px;color:#6f757f;border:1px solid #3a3e46;border-radius:6px;padding:0 5px;flex:none}',
-    '.site-row .del{flex:none;cursor:pointer;color:#f0a04b;font-size:12px;padding:1px 6px}',
-    '.sites-add{display:flex;gap:6px;margin-top:6px}',
-    '.sites-add input{flex:1;min-width:0;background:#262a30;border:1px solid #3a3e46;border-radius:8px;color:#e6e8ec;font-size:12px;padding:7px 9px;outline:none}',
-    '.sites-add input::placeholder{color:#6f757f}',
-    '.sites-add button{flex:none;padding:7px 12px;border-radius:8px;border:1px solid #3a5a4a;background:#22382f;color:#9fdec4;font-size:12px}',
-    '.sites-tip{font-size:11px;color:#6f757f;margin-top:5px;line-height:1.5}',
     '.btns{display:flex;gap:8px;margin-top:10px}',
     '.btns button{flex:1;padding:9px;border-radius:9px;border:1px solid #3a3e46;background:#262a30;color:#dfe3e9;font-size:12px}',
     '.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom));',
@@ -493,13 +395,6 @@
     '  <label class="opt"><input type="checkbox" data-k="ads">  清理广告位与外站 iframe</label>',
     '  <label class="opt"><input type="checkbox" data-k="tip">  拦截时显示提示</label>',
     '  <label class="opt"><input type="checkbox" data-k="ball">  显示这个悬浮球</label>',
-    '  <label class="opt"><input type="checkbox" data-k="scheme">  拦截跳 App（taobao:// 等）</label>',
-    '  <div class="sites">',
-    '    <div class="sites-t">保护站点：</div>',
-    '    <div id="sites-list"></div>',
-    '    <div class="sites-add"><input id="site-input" type="text" placeholder="xxx.com，多个用逗号分隔"><button id="site-add">添加</button></div>',
-    '    <div class="sites-tip">添加后，到对应网站刷新页面即生效。</div>',
-    '  </div>',
     '  <div class="log" id="log"></div>',
     '  <div class="btns"><button data-a="diag">复制诊断信息</button><button data-a="clear">清空记录</button></div>',
     '</div>',
@@ -532,16 +427,6 @@
 
     const sh = root.attachShadow({ mode: 'open' });
     sh.innerHTML = SHADOW_HTML;
-
-    // 调试横幅（v1.1.3）：确认脚本已成功注入并加载，几秒后自动消失
-    try {
-      const dbg = document.createElement('div');
-      dbg.id = 'aj-debug-banner';
-      dbg.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);top:8px;z-index:2147483601;background:rgba(15,123,95,.92);color:#fff;font:12px/1.6 sans-serif;padding:6px 14px;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.35);pointer-events:none;transition:opacity .4s';
-      dbg.textContent = '🛡 防跳转脚本已加载 v1.1.3';
-      sh.appendChild(dbg);
-      setTimeout(function () { dbg.style.opacity = '0'; setTimeout(function () { if (dbg.parentNode) dbg.parentNode.removeChild(dbg); }, 500); }, 2500);
-    } catch (e) { }
 
     const ball = sh.getElementById('ball');
     const panel = sh.getElementById('panel');
@@ -582,14 +467,13 @@
             esc(r.host) + '</span><span class="t">' + esc(r.t) + '</span></div>';
         }).join('');
       }
-      renderSites();
     }
 
     function copyDiag() {
       const L = [];
       L.push('【防跳转诊断报告】');
       L.push('页面: ' + location.href);
-      L.push('站点清单: ' + allSites().join(', '));
+      L.push('站点清单: ' + SITES.join(', '));
       L.push('已拦截: ' + stats.n + ' 次');
       L.push('配置: ' + JSON.stringify(cfg));
       L.push('');
@@ -638,7 +522,7 @@
       if (!k) return;
       cfg[k] = !!e.target.checked;
       saveCfg();
-      if ((k === 'on' && !cfg.on) || (k === 'scheme' && !cfg.scheme)) restoreLinks();
+      if (k === 'on' && !cfg.on) restoreLinks();
       sweep();
       refresh();
     });
@@ -647,52 +531,6 @@
       stats.log = []; stats.n = 0; stats.seen = {}; refresh();
     });
     sh.querySelector('[data-a="diag"]').addEventListener('click', copyDiag);
-
-    // ---- 站点管理 ----
-    function renderSites() {
-      const box = sh.getElementById('sites-list');
-      if (!box) return;
-      const list = allSites();
-      box.innerHTML = list.map(function (s) {
-        const builtin = SITES.indexOf(s) >= 0;
-        return '<div class="site-row"><span>' + esc(s) + '</span>' +
-          (builtin ? '<span class="tag">内置</span>' : '<span class="del" data-s="' + esc(s) + '">删除</span>') +
-          '</div>';
-      }).join('') || '<div class="empty">暂无</div>';
-    }
-
-    function addSitesFromInput() {
-      const inp = sh.getElementById('site-input');
-      if (!inp) return;
-      const parts = String(inp.value || '').split(/[\s,，;；]+/);
-      let added = 0, dup = 0, bad = 0;
-      for (let i = 0; i < parts.length; i++) {
-        if (!parts[i]) continue;
-        const s = normSite(parts[i]);
-        if (!s) { bad++; continue; }
-        if (allSites().indexOf(s) >= 0) { dup++; continue; }
-        userSites.push(s); added++;
-      }
-      if (added) saveUserSites();
-      inp.value = '';
-      renderSites();
-      if (added) toastFn('已添加 ' + added + ' 个站点，到该网站刷新生效');
-      else if (dup) toastFn('已在列表中');
-      else if (bad) toastFn('格式不对：只填域名，如 xxx.com');
-    }
-
-    sh.getElementById('site-add').addEventListener('click', addSitesFromInput);
-    sh.getElementById('site-input').addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') { e.preventDefault(); addSitesFromInput(); }
-    });
-    sh.getElementById('sites-list').addEventListener('click', function (e) {
-      const s = e.target && e.target.getAttribute && e.target.getAttribute('data-s');
-      if (!s) return;
-      userSites = userSites.filter(function (x) { return x !== s; });
-      saveUserSites();
-      renderSites();
-      toastFn('已移除：' + s);
-    });
 
     ui = { refresh: refresh };
     refresh();
@@ -713,16 +551,5 @@
     buildUI();
     sweep();
     startSweeps();
-  }
-
-  } catch (err) {
-    // 任何未预料的错误都显示出来（这类脚本最怕"静默失败"，出问题时至少让你看见）
-    try {
-      const d = document.createElement('div');
-      d.style.cssText = 'position:fixed;left:8px;right:8px;bottom:10px;z-index:2147483647;background:#c62828;color:#fff;font:12px/1.7 sans-serif;padding:10px 12px;border-radius:10px;word-break:break-all;box-shadow:0 4px 16px rgba(0,0,0,.4)';
-      d.textContent = '🛡 防跳转脚本运行出错：' + (err && (err.message || err));
-      const host = document.body || document.documentElement;
-      if (host) host.appendChild(d);
-    } catch (e2) { }
   }
 })();
