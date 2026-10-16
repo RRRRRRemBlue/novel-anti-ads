@@ -151,13 +151,14 @@ kbd{background:var(--code);border:1px solid var(--line);border-radius:5px;paddin
 <script data-page-node-id="sTf6OnxW8UBCWMCzdAdqqf" data-pnid-children="RfazymMTLRfOlRgmJRo2hk" id="src-userscript" type="text/plain">// ==UserScript==
 // @name         人人热书 · 防跳转纯净阅读
 // @namespace    https://local.antijump/
-// @version      1.1.1
+// @version      1.1.2
 // @description  拦截小说站的点击劫持、强制跳转、弹窗广告、外站 iframe 与跳 App 广告，只留下正文和翻页按钮。悬浮球面板里可直接管理保护站点。
 // @author       WorkBuddy
 // @match        *://*/*
 // @run-at       document-start
 // @noframes
-// @grant        none
+// @grant        GM_getValue
+// @grant        GM_setValue
 // ==/UserScript==
 
 /*
@@ -171,6 +172,10 @@ kbd{background:var(--code);border:1px solid var(--line);border-radius:5px;paddin
  *
  * 说明：脚本会在所有网站加载（@match 全站），但只有「保护站点」列表里的域名
  * 才会真正启用防护；其他网站会在 1 毫秒内静默退出，不做任何事。
+ *
+ * 站点列表存放在脚本管理器的全局存储（GM_getValue/GM_setValue）里，所有网站
+ * 共享同一份——所以在 A 站面板里添加的域名，在 B 站同样生效。
+ * （浏览器自带的 localStorage 是按网站隔离的，做不到跨站共享，因此不用它。）
  */
 
 (function () {
@@ -178,8 +183,9 @@ kbd{background:var(--code);border:1px solid var(--line);border-radius:5px;paddin
 
   /* ============================================================
      0. 站点清单
-        内置站在 SITES 里；用户自己添加的站保存在浏览器本地（盾牌面板里管理），
-        两者合并生效。只写域名，不要写 http:// 或 www.
+        内置站在 SITES 里；用户自己添加的站存在脚本管理器的全局存储中
+        （所有网站共享，盾牌面板里管理），两者合并生效。
+        只写域名，不要写 http:// 或 www.
      ============================================================ */
   const SITES = [
     'renrenreshu.com',
@@ -188,14 +194,44 @@ kbd{background:var(--code);border:1px solid var(--line);border-radius:5px;paddin
   ];
   const SITES_KEY = 'AJ_SITES_V1';
 
-  function loadUserSites() {
+  // ---------- 站点列表存储（跨网站共享） ----------
+  // localStorage 按网站隔离（A 站存的 B 站读不到），所以用脚本管理器的
+  // 全局存储（GM_getValue/GM_setValue）。没有 GM 环境时回退 localStorage；
+  // 首次运行会把旧版存在 localStorage 里的数据自动迁移到全局存储。
+  function parseSiteList(txt) {
+    const out = [];
+    if (!txt) return out;
     try {
-      const arr = JSON.parse(localStorage.getItem(SITES_KEY) || '[]');
-      return Array.isArray(arr) ? arr.filter(function (s) { return typeof s === 'string' && s; }) : [];
-    } catch (e) { return []; }
+      const v = JSON.parse(txt);
+      if (Array.isArray(v)) {
+        for (let j = 0; j < v.length; j++) {
+          const s = v[j];
+          if (typeof s === 'string' && s && out.indexOf(s) < 0) out.push(s);
+        }
+      }
+    } catch (e) { }
+    return out;
   }
-  let userSites = loadUserSites();
-  function saveUserSites() { try { localStorage.setItem(SITES_KEY, JSON.stringify(userSites)); } catch (e) { } }
+  function readStoredSites() {
+    let gm = '';
+    try { if (typeof GM_getValue === 'function') gm = String(GM_getValue(SITES_KEY, '') || ''); } catch (e) { }
+    if (gm) return parseSiteList(gm); // 已有全局数据：以它为准（删除过的站点不会从旧 local 数据里"复活"）
+    let local = '';
+    try { local = localStorage.getItem(SITES_KEY) || ''; } catch (e) { }
+    return parseSiteList(local);      // 全局存储为空：从本域 localStorage 做一次性迁移
+  }
+  let userSites = readStoredSites();
+  function saveUserSites() {
+    const txt = JSON.stringify(userSites);
+    try { if (typeof GM_setValue === 'function') GM_setValue(SITES_KEY, txt); } catch (e) { }
+    try { localStorage.setItem(SITES_KEY, txt); } catch (e) { }
+  }
+  // 首次迁移：全局存储还没有数据时，把从 localStorage 迁移来的结果落盘
+  try {
+    if (typeof GM_setValue === 'function' && typeof GM_getValue === 'function' && !GM_getValue(SITES_KEY, '') && userSites.length) {
+      GM_setValue(SITES_KEY, JSON.stringify(userSites));
+    }
+  } catch (e) { }
   function allSites() {
     const out = SITES.slice();
     for (let i = 0; i < userSites.length; i++) if (out.indexOf(userSites[i]) < 0) out.push(userSites[i]);
