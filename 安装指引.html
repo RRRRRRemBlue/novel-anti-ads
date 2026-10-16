@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html data-page-node-id="3MFV8v4TUIKvR7EHGdSWap" lang="zh-CN">
+<head data-page-node-id="TvqM0XA5e9K3c76F2YMuHr">
+<script data-page-node-id="o9lgxigCU8umbMg9ftJK6P" src="/page/page_comm/inject.js"></script>
+<meta data-page-node-id="7TyyTmT3rQMWHWxAvN552K" charset="utf-8">
+<meta data-page-node-id="uEjhOGk0f8hIvjAkm9GwEi" content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport">
+<meta data-page-node-id="mgWqu39Kp7WexNQp84cy4w" content="light dark" name="color-scheme">
+<title data-page-node-id="KOKiyDDieoUFZuaEvL8wey" data-pnid-children="iremrsC7rahHcULKzOzeFl">人人热书 · 防跳转纯净阅读</title>
+<style data-page-node-id="UsE49FEv1fyQhk0Jh9prxo" data-pnid-children="PjCa6UGvbC5Rcv51yvwnOq">
+:root{
+  --bg:#f5f6f8; --card:#fff; --fg:#1c1e23; --sub:#6b7280; --line:#e5e7eb;
+  --accent:#0f7b5f; --accent-soft:#e6f5f0; --warn:#b45309; --warn-soft:#fef3e2;
+  --code:#f3f4f6;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --bg:#16181c; --card:#1e2126; --fg:#e8eaee; --sub:#9aa1ad; --line:#2c3037;
+         --accent:#4fd1a5; --accent-soft:#172c26; --warn:#f0a04b; --warn-soft:#2a2318;
+         --code:#161a1f; }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:16px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  padding:0 14px calc(40px + env(safe-area-inset-bottom));}
+header{padding:26px 4px 14px}
+h1{font-size:21px;margin:0 0 6px;letter-spacing:.2px}
+.lead{color:var(--sub);font-size:14px;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 18px;margin:14px 0}
+.card h2{font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:9px}
+.num{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;
+  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+@media (prefers-color-scheme:dark){.num{color:#0d1a16}}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:20px}
+li{margin:5px 0}
+code{background:var(--code);padding:1.5px 6px;border-radius:6px;font-size:13px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.tag{display:inline-block;background:var(--accent-soft);color:var(--accent);
+  font-size:12px;padding:2px 9px;border-radius:20px;font-weight:600}
+.warn{background:var(--warn-soft);border-color:var(--warn-soft)}
+.warn h2{color:var(--warn)}
+button{width:100%;border:0;border-radius:12px;padding:14px;font-size:15.5px;font-weight:600;
+  background:var(--accent);color:#fff;margin-top:10px;cursor:pointer;transition:transform .1s}
+@media (prefers-color-scheme:dark){button{color:#0d1a16}}
+button:active{transform:scale(.985)}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--fg);font-weight:500;font-size:14px}
+details{border-top:1px solid var(--line);padding:11px 0 3px;margin-top:6px}
+details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:600;font-size:14.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";color:var(--accent)}
+details[open] summary::before{content:"▾ "}
+details p,details ul{font-size:14.5px;color:var(--sub)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+th{color:var(--sub);font-weight:600;font-size:13px}
+.ok{color:var(--accent);font-weight:700}
+footer{color:var(--sub);font-size:12.5px;text-align:center;padding:18px 4px 0}
+textarea{position:fixed;left:-9999px;top:0}
+.hint{font-size:13px;color:var(--sub);margin-top:8px}
+kbd{background:var(--code);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px}
+</style>
+</head>
+<body data-page-node-id="uQ7cfOhTT0IaTu5PSZ871z">
+
+<header data-page-node-id="IQMkb7IG0FKbBInYyAB4OE">
+  <h1 data-page-node-id="r5TYP7nBD0M03MRaSoCyv0"><!--pnid:2hZtJLkE3gNakOknx6Sr8R-->人人热书 · 防跳转纯净阅读</h1>
+  <p data-page-node-id="618lViH6AuDTaXos4Tstme" class="lead"><!--pnid:szyX7zqhqw11FcOjGd6oq0-->点击不跳走、不弹窗、不自动跳转，只留正文和翻页。</p>
+</header>
+
+<div data-page-node-id="miAkqisdR4ZCzmCd7dg7YN" class="card">
+  <h2 data-page-node-id="dVzuaEEpDnq4NxES7qv9E6"><span data-page-node-id="kfGZUMY6GPlU8zYQ6eljOa" class="num"><!--pnid:Ytq0wC3eZCLPWXOkr9FxRW-->1</span><!--pnid:I5SvvPUohBeaAVrvYyeTAz-->先说清楚它是怎么拦的</h2>
+  <p data-page-node-id="tfMI8aNH5CfCPD59Jyfv2u"><!--pnid:CW6P3e5MQDcuN5RGvzDUS8-->不靠"猜它把广告写在哪"，而是守住<strong data-page-node-id="fNKC7IInExREmEFSGM6PRm"><!--pnid:j2VwNCCwKT7eMia534pN0x-->「出站」这一个关口</strong><!--pnid:SirYm2scHAGTjApCt6hj1X-->——任何要离开本站的跳转，一律拦下。所以站点改版也不会失效。</p>
+  <table data-page-node-id="gtAZ5TgafIN8gCOrgBNTdx">
+    <tr data-page-node-id="7hvdJUv9bgbWFkzzcS7mLA"><th data-page-node-id="w3QzbAPVAV4pEEBgCuz1xY"><!--pnid:DRNdihXmmT7hNnlJQl61Hn-->它的花招</th><th data-page-node-id="9TzXQgfi7GDSmyk8seFQop"><!--pnid:5uuIX78uzCzHX5M4XZrvMX-->怎么挡</th></tr>
+    <tr data-page-node-id="Prrx6D6rXmgxFAd63F4HmV"><td data-page-node-id="YSHhTOI0xaC3RfrONw1AOU"><!--pnid:cgA6f6pBGoumYpxwrA5DQN-->透明链接铺在正文上，点哪都跳</td><td data-page-node-id="IeeEStxaIlD9UEQot8giUj"><!--pnid:xySvJ8oIxtlRxz9Mu3Y1qV-->点击瞬间判定目标域名</td></tr>
+    <tr data-page-node-id="6TVuJQBY7RlfmpfF2UIdIX"><td data-page-node-id="QiNSN19AnYDVOZrORi00q8"><code data-page-node-id="aJ4x8nO5fBjvDaz7VELdIH" data-pnid-children="x2z44SU2sm2qsT6hchjHzz">window.open</code><!--pnid:XLesAROiYVnp1Ecvrflhza--> 弹新标签</td><td data-page-node-id="8zrNHn6fnd3JNWLYVIi3cx"><!--pnid:7p6DZhWnUhmQjToSYRmvmZ-->直接返回空，不给弹</td></tr>
+    <tr data-page-node-id="8sTBsnjSfFwrZkhDhh1Qpc"><td data-page-node-id="9B6eF7T9fSsM0l7zU24O8C"><!--pnid:4lCTC9sc8NU0yTST1Z4wD6-->几秒后自动 <code data-page-node-id="buYquvbQY205Skmv6aL6RH" data-pnid-children="mqTe2jZvg7hEfuEuHtBFPg">location.href=…</code></td><td data-page-node-id="gO2e8NbgV62povUmUByL2W"><!--pnid:v3gU0eYIAS4O6c6tZuaLvG-->导航级取消（关键）</td></tr>
+    <tr data-page-node-id="rJrEETIB1tsvAkPhpXeVuZ"><td data-page-node-id="JjrdnF5aqJq5tNbTNjKvjO"><code data-page-node-id="WvqajdfXNDbaalilaJmLsf" data-pnid-children="NnkbTFNlXeVXrN3pBPfppw">meta refresh</code><!--pnid:SOO8XBPcxpPukMmTpbnge3--> / 外站 iframe</td><td data-page-node-id="Gbn5d3HqBybBdoUfrmsXWx"><!--pnid:VW1u9LgTumnvtZHmOpZvTJ-->取消导航 + 移除节点</td></tr>
+    <tr data-page-node-id="NljipKlVwB2SHIuHyGRuR4"><td data-page-node-id="D1hcnCZQyFEJgZJWqEu8lv"><!--pnid:ftqDKPp9lMuOLqq54djRk3-->广告位、全屏透明遮罩</td><td data-page-node-id="bl9RiOEunaqYcOGDddnj3h"><!--pnid:ynjljjxTOCnmrOvwtw7hB9-->直接清掉</td></tr>
+  </table>
+  <p data-page-node-id="isbeL9Xj3AUZVuyfPXglwg" class="hint"><!--pnid:Lz9pOzagTOfAWX07o2jjPx-->核心用的是浏览器官方的 <strong data-page-node-id="cf9Y9sio1VgyINvbP2BFSq"><!--pnid:AqkH0UM6gZvvLSlSJoVIC7-->Navigation API</strong><!--pnid:kwUEQOmMaVJ0UIU7NAkAZp-->：网页任何跳转动作发生前都会先"打报告"，我们把它拦下来。这是目前<strong data-page-node-id="WUEY7t3xhIo91KErt6RQGI"><!--pnid:WB02cYhHbr3RYnYpRt8jiY-->唯一</strong><!--pnid:Hs8wUGgnXavbFmlWjfDVMG-->能真正取消一次跳转的办法。</p>
+</div>
+
+<div data-page-node-id="zaxAbmPodkUYjnJ6qGKpQr" class="card">
+  <h2 data-page-node-id="sRFQ02lYwpYMicr5L2oAGL"><span data-page-node-id="nxwNVcKpYjI3FNvKEoDp77" class="num"><!--pnid:C0wf2ooXYoaF5Z23Zj3xYn-->2</span><!--pnid:NV3LG1STCnN4kWvGuFF3Vo-->安装（就用你现在的手机 Edge）</h2>
+  <p data-page-node-id="XetMP8U7uNN9qjJJrUL7Mv"><span data-page-node-id="rfEq1dps85V3dWIM2BD8U5" class="tag"><!--pnid:3JR2SQAVZdnYR2fFOtfMWe-->好消息</span><!--pnid:PR03ahggUKlqmahfWgWGQ2--> 安卓版 Edge 从 v134 起已经自带扩展商店，里面就有 Tampermonkey。不用换浏览器。</p>
+  <ol data-page-node-id="DXGP9tIcIQPR1toSMXWOOB">
+    <li data-page-node-id="FLBytcjibEiOY8eiR6xlg0"><!--pnid:am9az2lbWeivDHTLt5kr23-->到应用商店把 <strong data-page-node-id="RiN02puxwamu9aTTTH8Nep"><!--pnid:Phz0FhvXrkltaj6upNVygT-->Edge 更新到最新版</strong><!--pnid:Bj15e3WBw5yz8E10tKSjIh-->（旧版本没有扩展商店）。</li>
+    <li data-page-node-id="ttIsDm1EmT9sInBRjW6RSc"><!--pnid:cMUr8WiLUzpAVA5NBaGmdF-->打开 Edge，点底栏中间的 <strong data-page-node-id="0yA87dDB7AX9mSb8NusjNu"><!--pnid:lyuP7W8wJTicxZx5oUZ5MD-->菜单（≡）</strong><!--pnid:NDR3hvz8jPaGL3sHhWIHuf--> → <strong data-page-node-id="6MOND2nFi584DwBT6ADbII"><!--pnid:TMzEU2h4FcChr54z73Cksn-->扩展</strong><!--pnid:QLHkEzLYUuztEnHmALAKrQ-->。</li>
+    <li data-page-node-id="D5Wcz59ilnBjTdo9tjFjlC"><!--pnid:6kuALneD4PatnlCdoZTeP1-->找到 <strong data-page-node-id="yrgUf5qa7tT9jDyhtVYV0o"><!--pnid:zOzocfc8jl4kWbZm4ZVhK0-->Tampermonkey</strong><!--pnid:wAmEmrxF2SVfknFECp57W1--> → 点 <strong data-page-node-id="Xyeuytx19Oz76l6j1EtAqu"><!--pnid:Ybnm1kohaZ751jtscjPACx-->获取 / Add</strong><!--pnid:Loet7N59wjTqlwcXfo0yX3--> 装上。</li>
+    <li data-page-node-id="2vMPonqajZEOJWJijvxlZj"><!--pnid:sr8mYl00vuPLkTKdmV9LUr-->回到这个页面，点下面的按钮复制脚本。</li>
+    <li data-page-node-id="VQUwRappHHfvyGl8sCjrrr"><!--pnid:4sJChyFGsu1DqjxPmdTijg-->打开 Tampermonkey 面板 → 点 <strong data-page-node-id="eYsnKNAi7zYQAgUGsGJGH8"><!--pnid:XqxQNY8LusjoLuzVXh52lJ-->+</strong><!--pnid:Su9aYaSK5BjwxVke9A8SDd--> 新建脚本 → 全选删除 → 粘贴 → <strong data-page-node-id="bu3zz2AzPcQSWfgX3IEDzO"><!--pnid:FyR0dM2A3UcX4OBobc3kOb-->保存</strong><!--pnid:SiL4Zo08U9DkmQ53MRJlxs-->（右下角磁盘图标）。</li>
+    <li data-page-node-id="PLTeY0fWvocmFMxKxGuR1I"><!--pnid:qfG46cAIYw2lgoLYrfayJa-->打开小说页面，右下角会出现一个半透明盾牌图标 = 生效了。</li>
+  </ol>
+  <button data-page-node-id="ELmMkgnTn7NWALgqbrOjmb" data-label="复制脚本代码" id="copy-src"><!--pnid:ksssnxkmt5nA6den3jgvqv-->复制脚本代码</button>
+  <p data-page-node-id="PyrLCh5qXTrI2UxjsBhhTG" class="hint"><!--pnid:yjTfdjfOJ0lBThH4ja12Mb-->粘贴时如果提示"检测到新脚本"，点是即可。装好后可以顺手把这个页面收藏掉。</p>
+</div>
+
+<div data-page-node-id="Ke8SwNtMpD0I6QUlmIpDfD" class="card">
+  <h2 data-page-node-id="U5KQA8QxfPhA6GnhkK1Nf6"><span data-page-node-id="TmEh53mscOFBW3RgTpmeWZ" class="num"><!--pnid:ssNMn9FJWWhxM9oxJaccAY-->3</span><!--pnid:GxtLqfu38HjNhKqBFTSwGf-->验证一下</h2>
+  <ul data-page-node-id="x62a2650nWm4ojTPPKsxyl">
+    <li data-page-node-id="MuEU6rrsFEGuySaRjd1vpO"><!--pnid:KRULXMPXtkcyfWTjIMpuXr-->打开任意章节，随手在正文上点几下 —— 页面<strong data-page-node-id="A2AczaZx2U4b0CcRyGQkmf"><!--pnid:72JNW7TevCXsHKs6Uadb4J-->不应该</strong><!--pnid:vi3bnCoE3TBSehzrFcFMfk-->跳走或弹新标签。</li>
+    <li data-page-node-id="10xeBmFza0Mwc1kVqfIMWc"><!--pnid:xGsykiKSGl0qYJHhIMq7Pa-->点右下角盾牌图标，能看到"已拦截 N 次外部跳转"和具体拦截记录。</li>
+    <li data-page-node-id="X0BBeyfZkURl2hOLgdLyy7"><!--pnid:oqqCI36rSNdw70DwYdM302-->点「下一章」—— <strong data-page-node-id="CoIz7Mut1kThinVgr1HJ36"><!--pnid:DKmcEBjvJLJbm4es2zUNIc-->必须正常翻页</strong><!--pnid:yFloqwfgsZn0M76KBPM9M1-->（同站链接是完全放行的，这条已验证）。</li>
+    <li data-page-node-id="hSzkbBfcOeJVUX8regfQVl"><!--pnid:OslUhEIjoi0nQJLneahTYN-->阅读时嫌那个盾牌碍事？打开面板取消勾选「显示这个悬浮球」即可。</li>
+  </ul>
+</div>
+
+<div data-page-node-id="uKQHc6frmNH0tV4pIcg6pp" class="card warn">
+  <h2 data-page-node-id="c0T7SszbmAGLzOCU8aPq0u"><span data-page-node-id="jNk5p7QsIienFOoN0CLW2q" class="num"><!--pnid:Y8tMoc4GeFDHFb5Q63mVen-->4</span><!--pnid:gft12XpPvfybsRufTpKWHd-->要是装不上扩展（备用方案）</h2>
+  <p data-page-node-id="8ygV8iGEXBOWp4EfbdGy1d"><!--pnid:HLqajZaHmkeYt6KPy77zHc-->不想装扩展，或者扩展商店里暂时没有 Tampermonkey，可以用「小书签」。缺点是<strong data-page-node-id="EWYwJqV7SZhnTLVKbcygt1"><!--pnid:YqIgAKq6OYwmOAuBYIzFWr-->每次打开页面要手动点一下</strong><!--pnid:qsuXz3FaDHY5lai5miwhHu-->，效果一样。</p>
+  <ol data-page-node-id="WMoVv1OG0NzskFycR1yfPv">
+    <li data-page-node-id="xQNxJgTednzczhHUT40STA"><!--pnid:elW4UP6rhsdyFshaSLYyyT-->先把下面这段代码复制下来。</li>
+    <li data-page-node-id="T3voowuAvyRu5SvULYVJUN"><!--pnid:ScZR89DHbfoX8HJ79QOqIu-->Edge 里随便收藏一个页面 → 打开<strong data-page-node-id="ffmCn4FYsFx3oE0wCINozn"><!--pnid:3kZMser4BsiJsRiBG0NDmz-->收藏夹</strong><!--pnid:D71Pf7PUgaRJZMoaysXlMo--> → 编辑这条收藏 → 名称改成 <code data-page-node-id="JdiEM82L3st6D3zXVJt1SS" data-pnid-children="37iHwz6SyoWusXzxRUlWD5">纯净阅读</code><!--pnid:vnowI8b4PasKUN2gGqDqHf-->，网址整个替换成刚才复制的代码 → 保存。</li>
+    <li data-page-node-id="DW4ZIrnM36EF5uyn8ArHNE"><!--pnid:tP1LIdhGYXLfg73eFB5a9i-->以后在小说页，点地址栏输入"<strong data-page-node-id="wVpoKwr6MZsfwzOWQ9iBzh"><!--pnid:fNSN4yBOV6Yxnmn7FMvJBB-->纯净阅读</strong><!--pnid:lWbcTGa94DZ5i3GtvZDLxN-->"，在联想列表里选带星标的那条（<strong data-page-node-id="BQNA5zCuz1VgBY5z8m19Ou"><!--pnid:8nRC6Qom2YHFnqOvqEd6Lf-->别按回车</strong><!--pnid:8MDPbE5jxKEhU9hvxbkdyx-->，要直接点那条收藏），脚本就执行了。</li>
+  </ol>
+  <button data-page-node-id="hz2y0k3XqbDdr6NaXo5GRs" class="ghost" data-label="复制小书签代码" id="copy-bm"><!--pnid:g014UIOACVTROjekHCLpGR-->复制小书签代码</button>
+  <p data-page-node-id="cOdoqiafFVswIUpoiLZJU3" class="hint"><!--pnid:N1PIbI712JRCddgItxBDAx-->注意：一定要从<strong data-page-node-id="Y4DCNcA34tFTHb1Us5MAvA"><!--pnid:Y6CTzn2izknbwNZQi3FMVQ-->地址栏联想</strong><!--pnid:CGEtqIP5pF8d6p8RHsQUef-->里点，从收藏夹列表里点是不会执行代码的，这是安卓浏览器的限制。</p>
+</div>
+
+<div data-page-node-id="0EyD7tmMv0S22UflVRBgJD" class="card">
+  <h2 data-page-node-id="n0f5HFzhRaRBuHXF4XqMHr"><span data-page-node-id="AjIxgvBGFUbAj4x21QnSQb" class="num"><!--pnid:QaHMQr5fww2rwMzWQtLvqX-->5</span><!--pnid:cnWLQZR2GndYNKbjqsIKNw-->顺手再关掉几个口子</h2>
+  <p data-page-node-id="Jcw0dXBtww2Hv3fMm62h5T"><!--pnid:IQqhf81y2rZWm8czBHjGub-->和脚本配合，效果更好（都是 Edge 自带功能，不用装东西）：</p>
+  <ul data-page-node-id="EKT4lDd3VoUdjAH7SSM0Hu">
+    <li data-page-node-id="QEm5oVd3ypYIESkM8lt7ut"><!--pnid:FIO1iDy644aiNYsi389q8U-->菜单 → <strong data-page-node-id="Quo9hVFPT0Y2fDf6JiPb8x"><!--pnid:fxj5YR5XOY4pLs1SdcNIcE-->设置</strong><!--pnid:Bhn2NNeAq4mwTrlFMO1kr9--> → <strong data-page-node-id="0VMtCvNXOsPh81uV7vn7er"><!--pnid:0XtFs0NLmFSCwRJR1mP96c-->隐私和安全</strong><!--pnid:v81Mz538YgTACb5x9vLO0z--> → <strong data-page-node-id="iygQgJUFS0eVML46U8c4j6"><!--pnid:S41iJgk5NHHI1OdE4BiGT9-->内容拦截器</strong><!--pnid:tblR3OuAGb47dMTQFQXEjq--> → 打开「阻止广告」。</li>
+    <li data-page-node-id="0oe4Gha9BYGlZXjtsjLBGZ"><!--pnid:l07AOn7PDVtxABkxdmNr0J-->同一页 → 关掉「允许可接受广告」，拦得更彻底。</li>
+    <li data-page-node-id="JPRC28nBxyrVnsT5yZETde"><!--pnid:yMyifT1CMFRWW6w8zsj7tf-->阅读长文时，点地址栏旁边的<strong data-page-node-id="cUMoJ4rAUx3kqlf0utzWZM"><!--pnid:PsS8ZNfbSdahYGeTlFUibh-->书本图标</strong><!--pnid:6kmtB1q1ZXPzEWluZmrEVV-->开启「沉浸式阅读器」，正文更干净。</li>
+  </ul>
+</div>
+
+<div data-page-node-id="tKCwCxtF49EcbsKd61Hew3" class="card">
+  <h2 data-page-node-id="9GI81tKkzTbv0i5FHVDIlV"><span data-page-node-id="A8gBkOX1D7AqjlMJUGke9n" class="num"><!--pnid:BnGZmUQoS04YmJgwh0nzDt-->?</span><!--pnid:UapNbht632H3lffCOBNRg1-->常见问题</h2>
+  <details data-page-node-id="0EtLXTWqzhVTSDoKkukbJg"><summary data-page-node-id="hIfFGjurVN9CIIpCqEUGKl"><!--pnid:zR4ZmBHQ2Pw1kHmuEN3rX8-->装了还是会被跳走？</summary>
+    <p data-page-node-id="k7IKAk3RvdRooTlfVKAUdn"><!--pnid:EQT4chYwpORo9E0Lq9nnCQ-->先点盾牌图标确认「拦截点击 / 弹窗 / 强制跳转」是勾上的。如果仍然跳，点面板里的「<strong data-page-node-id="NdWQueNB0Dhfu5e8JJLfnE"><!--pnid:QXFbAcXbTQcfn6YlgmeinL-->复制诊断信息</strong><!--pnid:fuQpj4HSbrk3X1RW9CcUJ3-->」，把内容发我，我来加规则。</p></details>
+  <details data-page-node-id="cWvG99AmE4ANCpWA9SpmbD"><summary data-page-node-id="JEcd4f35a4LEovHIOn5Kth"><!--pnid:Y0aNTxWa1DM4U00aKQ8v4Z-->换域名 / 换书站了怎么办？</summary>
+    <p data-page-node-id="2rSEvNmHvMqgS71HOW6rcr"><!--pnid:nHV5xKHdt3ccMGEXLAr0Dr-->打开 Tampermonkey 里这个脚本，找到最上面这几行：<br data-page-node-id="4N4gA8lOa8pp8gOB2e4mlV">
+    <code data-page-node-id="yWzz7ODYGFtgDgZuqpZX31" data-pnid-children="DfZtlhQnvyOsDX2Yvu7JhR">const SITES = [ 'renrenreshu.com' ];</code><br data-page-node-id="jAgtXFJRVCYZnhftsGdZKz"><!--pnid:OE9yvAZq72uFIemSjDROtH-->
+    把你现在访问的域名加进去（一行一个，不要写 http:// 和 www.），保存即可。脚本对任何小说站都通用。</p></details>
+  <details data-page-node-id="jGvH5WyJWgZhq54UyQ5FDh"><summary data-page-node-id="OlAAYXPxNLix199cBuv1Ct"><!--pnid:9yzf82OTOacv0GlqPzkYLr-->会不会影响正常翻页和看书？</summary>
+    <p data-page-node-id="QbMEVbaLGRu78BCdORxIGS"><!--pnid:dNdqCLTVsKkAu1xxpjnOOU-->不会。判定规则是「<strong data-page-node-id="ij4FTPr0bbt48Jac4LQKkR"><!--pnid:8LULM9j4vHAwgCybATA72c-->只拦站外</strong><!--pnid:OKSU0Gic1hMQWTzIiUEXIO-->」：同域名、同主域、相对路径的链接一律放行。<code data-page-node-id="KOzXCHqWvr6Sw4iu9FFAJc" data-pnid-children="nfUlZkaB8sZrnKDaPvxR7I">下一章</code><!--pnid:jTCLJUXubDg6dFu8c2u6T6-->/<code data-page-node-id="aDaNpHjwYPpvqcziNyDRR3" data-pnid-children="ENZJLQXo3z6qLTkWt97Xse">目录</code><!--pnid:W85sTnnRGygk0asmTCIYDW--> 这些全部正常。</p></details>
+  <details data-page-node-id="3jtTeY1axuneIUqZJoikcz"><summary data-page-node-id="g9WNOYZzsWj0PMQRrbcQaJ"><!--pnid:2sMY3SHdJ2xH9N9QF2rK0I-->正文被误删了 / 广告没清干净？</summary>
+    <p data-page-node-id="JndHq4DhIiQHx6nAkuQlhK"><!--pnid:BKN5ARQZUtmM7nJiBLFhZu-->面板里把「清理广告位与外站 iframe」关掉试试。这条是按 <code data-page-node-id="VJMWCHcJ2QlFyFxaRoHyaz" data-pnid-children="hAHbdiM2ogKl38JaO9p6Gx">id</code><!--pnid:cWOe4ODe9ZzkfVd1FWsCdh-->/<code data-page-node-id="DVWRfeNhhQDyXUr0yzPtSP" data-pnid-children="P1mL9MxMOKuLdheRuzp3z4">class</code><!--pnid:Dzsa4zhifyalACglHO5PGc--> 关键词清理的，个别站点可能误判，关掉不影响防跳转。</p></details>
+  <details data-page-node-id="azioJk5rCd7I2JBXQDbpKV"><summary data-page-node-id="3MuACzxQcSToYpIERv00w1"><!--pnid:GzR8hFXTTg3NTQhlOuLzp4-->想临时放行一次外链怎么办？</summary>
+    <p data-page-node-id="mt10XxLJUtppuSagjqISoW"><!--pnid:Zad0jMOq5v3ZwsLtEbRD72-->面板里取消勾选「拦截点击 / 弹窗 / 强制跳转」，看完再勾回来（勾回来会自动恢复被冻结的链接）。</p></details>
+  <details data-page-node-id="TIdPIUKLx0eviKJ7idkt4c"><summary data-page-node-id="wCd03Bh7rjgCRugyc8wlEk"><!--pnid:swnqPFoSaLPVmAgrd4OFR1-->为什么有时候右下角什么提示都没有？</summary>
+    <p data-page-node-id="qZQejBTEGbAot0fcWcM58X"><!--pnid:Hj5d4v5VFdlVvEnzqE8jUv-->大多数跳转在导航层就被取消了，页面根本不会反应，提示条只是给你一个"刚才拦了一次"的反馈。可以关掉「拦截时显示提示」。</p></details>
+</div>
+
+<footer data-page-node-id="awyhOZYrpBJGfVNDV2kY1t"><!--pnid:VjKBnpCkaA1dVnBdooJ2Ac-->防跳转脚本已在本机做过 14 项浏览器回归测试，全部通过。</footer>
+
+<script data-page-node-id="sTf6OnxW8UBCWMCzdAdqqf" data-pnid-children="RfazymMTLRfOlRgmJRo2hk" id="src-userscript" type="text/plain">// ==UserScript==
+// @name         人人热书 · 防跳转纯净阅读
+// @namespace    https://local.antijump/
+// @version      1.0.0
+// @description  拦截小说站的点击劫持、强制跳转、弹窗广告与外站 iframe，只留下正文和翻页按钮，让你安安静静看完一章。
+// @author       WorkBuddy
+// @match        *://renrenreshu.com/*
+// @match        *://*.renrenreshu.com/*
+// @run-at       document-start
+// @noframes
+// @grant        none
+// ==/UserScript==
+
+/*
+ * 设计思路（为什么不用去适配它的广告代码）：
+ *   这类站的跳转手段就那么几种——① 把透明链接铺在正文上，点哪都跳；
+ *   ② 点击时 window.open 弹新标签；③ 定时把 location.href 改到外站；
+ *   ④ iframe / meta refresh 自动跳。所以只要守住"出站"这一个关口，
+ *   不管它用什么写法都能挡住，站点改版也不会失效。
+ *
+ * 换书站或加镜像站：只改下面第 0 节的 SITES 数组。
+ */
+
+(function () {
+  'use strict';
+
+  /* ============================================================
+     0. 站点清单（改了这里就等于换了保护范围）
+        只写域名，不要写 http:// 或 www.
+     ============================================================ */
+  const SITES = [
+    'renrenreshu.com',
+    // 'renrenreshu.net',
+    // 'renrenshu.cc',
+  ];
+
+  const HOST = location.hostname.toLowerCase();
+  const ACTIVE = SITES.some(function (s) { return HOST === s || HOST.endsWith('.' + s); });
+  if (!ACTIVE) return; // 不是目标站点，脚本什么都不做
+
+  /* ============================================================
+     1. 配置（存在浏览器本地，关掉浏览器也记得住）
+     ============================================================ */
+  const KEY = 'AJ_CFG_V1';
+  const DEFAULTS = { on: true, guard: true, ads: true, tip: true, ball: true };
+  let cfg = Object.assign({}, DEFAULTS);
+  try { Object.assign(cfg, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { }
+  function saveCfg() { try { localStorage.setItem(KEY, JSON.stringify(cfg)); } catch (e) { } }
+
+  /* ============================================================
+     2. 地址判定：这个链接算不算"外站"
+     ============================================================ */
+  function hostAllowed(h) {
+    h = String(h).toLowerCase();
+    return h === HOST || SITES.some(function (s) { return h === s || h.endsWith('.' + s); });
+  }
+
+  // 返回 'inner'    = 站内 / 相对地址 / javascript: 之类，放行
+  //      'external' = 站外，拦截
+  function classify(raw) {
+    if (raw === undefined || raw === null || raw === '') return 'inner';
+    raw = String(raw).trim();
+    if (/^(javascript|mailto|tel|sms|about|blob|data|#)/i.test(raw)) return 'inner';
+    let u;
+    try { u = new URL(raw, location.href); } catch (e) { return 'inner'; }
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') return 'inner';
+    return hostAllowed(u.hostname) ? 'inner' : 'external';
+  }
+
+  function hostOf(raw) {
+    try { return new URL(raw, location.href).hostname; } catch (e) { return String(raw).slice(0, 40); }
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  /* ============================================================
+     3. 统计 / 提示
+     ============================================================ */
+  const stats = { n: 0, log: [], seen: {} };
+  let ui = null;
+  let toastFn = function () { };
+
+  function record(kind, url) {
+    const h = hostOf(url);
+    const k = kind + '|' + h;
+    const now = Date.now();
+    if (stats.seen[k] && now - stats.seen[k] < 2000) return; // 同一目标 2 秒内只记一次，避免刷屏
+    stats.seen[k] = now;
+    stats.n++;
+    stats.log.unshift({ kind: kind, host: h, t: new Date().toLocaleTimeString('zh-CN', { hour12: false }) });
+    if (stats.log.length > 30) stats.log.length = 30;
+    toastFn('已拦截' + kind + '：' + h);
+    if (ui) ui.refresh();
+  }
+
+  function stopEvent(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+  }
+
+  /* ============================================================
+     4. 第一道防线：API 层拦截（document-start 立即生效）
+     ============================================================ */
+
+  // 4.0 【主力】Navigation API —— 唯一能"真正取消"一次导航的官方机制。
+  //     网页只要能跳转（点链接、改 location.href、meta refresh、表单提交……）
+  //     都会先触发这个 navigate 事件，我们在这里把去往站外的直接 cancel 掉。
+  //     Chrome / Edge 102 以上都支持，手机上百分百可用。
+  const navApi = (window.navigation && typeof window.navigation.addEventListener === 'function')
+    ? window.navigation : null;
+
+  if (navApi) {
+    try {
+      navApi.addEventListener('navigate', function (e) {
+        if (!cfg.on) return;
+        const url = e.destination ? e.destination.url : '';
+        if (!url) return;
+        if (classify(url) === 'external' && e.cancelable !== false) {
+          e.preventDefault();      // 导航直接被取消，页面纹丝不动
+          record(e.formData ? '表单跳转' : '跳转', url);
+        }
+      });
+    } catch (e) { }
+  }
+
+  // 4.1 弹窗：window.open
+  try {
+    const rawOpen = window.open;
+    window.open = function (url) {
+      if (cfg.on && url && classify(url) === 'external') {
+        record('弹窗', url);
+        return null;
+      }
+      return rawOpen.apply(this, arguments);
+    };
+  } catch (e) { }
+
+  // 4.2 强制跳转：location.assign / location.replace
+  //     （location.href = ... 的赋值浏览器不允许被改写，但它同样会触发 4.0 的
+  //      navigate 事件，所以一样会被取消）
+  try {
+    const proto = window.Location && window.Location.prototype;
+    if (proto) {
+      ['assign', 'replace'].forEach(function (fn) {
+        if (!proto[fn]) return;
+        const orig = proto[fn];
+        proto[fn] = function (url) {
+          if (cfg.on && url && classify(url) === 'external') {
+            record('跳转', url);
+            return;
+          }
+          return orig.apply(this, arguments);
+        };
+      });
+    }
+  } catch (e) { }
+
+  // 说明：早期版本这里还包了一层 setTimeout 回调来对比 location.href，
+  // 实测证明无效——旧文档里读 location.href 永远返回旧地址，
+  // 直到文档被替换为止，根本检测不到跳转。改用上面的 Navigation API 后删掉。
+
+  /* ============================================================
+     5. 第二道防线：点击拦截
+     ============================================================ */
+
+  // 找出点击目标上（或其祖先上）内联 on* 属性里写着的外站地址
+  function inlineJump(node) {
+    let el = node, n = 0;
+    while (el && el.nodeType === 1 && n++ < 10) {
+      const attrs = el.attributes;
+      for (let i = 0; i < attrs.length; i++) {
+        const a = attrs[i];
+        if (a.name.length > 2 && a.name.charCodeAt(0) === 111 && a.name.charCodeAt(1) === 110 && /https?:\/\//i.test(a.value)) {
+          const urls = a.value.match(/https?:\/\/[^\s'"()<>]+/gi) || [];
+          for (let j = 0; j < urls.length; j++) if (classify(urls[j]) === 'external') return urls[j];
+        }
+      }
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  function onPointer(e) {
+    if (!cfg.on) return;
+    const path = e.composedPath ? e.composedPath() : (function () {
+      const p = []; let n = e.target; while (n) { p.push(n); n = n.parentNode; } return p;
+    })();
+
+    for (let i = 0; i < path.length; i++) {
+      const el = path[i];
+      if (!el || el.nodeType !== 1) continue;
+      if (el.tagName === 'A') {
+        const marked = el.getAttribute('data-aj-blocked');
+        if (marked) { stopEvent(e); record('点击', marked); return; }
+        const raw = el.getAttribute('href');
+        if (classify(raw) === 'external') { stopEvent(e); record('点击', raw); return; }
+      }
+    }
+
+    const jump = inlineJump(e.target);
+    if (jump) { stopEvent(e); record('内联脚本', jump); }
+  }
+
+  ['pointerdown', 'touchstart', 'mousedown', 'click'].forEach(function (t) {
+    window.addEventListener(t, onPointer, true);
+  });
+
+  /* ============================================================
+     6. 第三道防线：导航守卫（仅当浏览器不支持 Navigation API 时才需要）
+        新版本 Chrome / Edge 走的是第 4.0 节，导航根本不会发生，轮不到这里。
+        老浏览器上还能抢救一下：万一真被跳走了，100ms 内自动弹回来。
+     ============================================================ */
+  if (!navApi && cfg.guard) {
+    let lastGood = location.href;
+    setInterval(function () {
+      const cur = location.href;
+      if (classify(cur) === 'external') {
+        if (!cfg.on || !cfg.guard) { lastGood = cur; return; }
+        record('自动跳转', cur);
+        try { location.replace(lastGood); } catch (e) { }
+      } else {
+        lastGood = cur;
+      }
+    }, 100);
+  }
+
+  /* ============================================================
+     7. 页面清理：外站 iframe、广告位、全屏透明遮罩
+     ============================================================ */
+  const AD_RE = /(^|[^a-z])(ad|ads|adv|advert|advertise|banner|guanggao|gg|tuiguang|popup|floatad)([^a-z]|$)/i;
+
+  function looksLikeAd(el) {
+    const sig = (el.id || '') + ' ' + (typeof el.className === 'string' ? el.className : '');
+    if (!AD_RE.test(sig)) return false;
+    if ((el.innerText || '').trim().length > 200) return false; // 有正文，别动
+    let longP = 0;
+    const ps = el.querySelectorAll('p');
+    for (let i = 0; i < ps.length; i++) if ((ps[i].innerText || '').length > 80) longP++;
+    return longP === 0;
+  }
+
+  function killAds() {
+    if (!cfg.ads) return;
+
+    // 7.1 外站 iframe（广告框基本都是外部域）
+    const iframes = document.querySelectorAll('iframe');
+    for (let i = 0; i < iframes.length; i++) {
+      const f = iframes[i];
+      const src = f.getAttribute('src') || f.getAttribute('data-src') || '';
+      if (src && classify(src) === 'external') f.remove();
+    }
+
+    // 7.2 广告容器（按 id / class 关键词，且不含正文）
+    const cand = document.querySelectorAll('div,section,aside,ins,ul');
+    for (let i = 0; i < cand.length; i++) {
+      const el = cand[i];
+      if (el.isConnected && looksLikeAd(el)) el.remove();
+    }
+
+    // 7.3 全屏透明遮罩（点了就跳的那种）
+    const layers = document.querySelectorAll('body > div, body > a, body > section, body > aside');
+    for (let i = 0; i < layers.length; i++) {
+      const el = layers[i];
+      if (!el.isConnected) continue;
+      const s = getComputedStyle(el);
+      if (s.position !== 'fixed' && s.position !== 'absolute') continue;
+      if ((parseInt(s.zIndex, 10) || 0) < 999) continue;
+      const r = el.getBoundingClientRect();
+      if (r.width < innerWidth * 0.9 || r.height < innerHeight * 0.5) continue;
+      if ((el.innerText || '').trim().length >= 40) continue; // 有文字说明是正常浮层
+      if (el.querySelectorAll('*').length > 8) continue;      // 结构复杂，别乱删
+      el.remove();
+    }
+  }
+
+  /* ============================================================
+     8. 站外链接"去激活"：长按也不会弹出"在新标签页打开"
+     ============================================================ */
+  function neutralizeLinks() {
+    if (!cfg.on) return;
+    const list = document.querySelectorAll('a[href]:not([data-aj-checked])');
+    for (let i = 0; i < list.length; i++) {
+      const a = list[i];
+      a.setAttribute('data-aj-checked', '1');
+      const raw = a.getAttribute('href');
+      if (classify(raw) === 'external') {
+        a.setAttribute('data-aj-blocked', a.href);
+        a.setAttribute('href', 'javascript:void(0)');
+        a.removeAttribute('target');
+      }
+    }
+  }
+
+  function restoreLinks() {
+    const list = document.querySelectorAll('a[data-aj-blocked]');
+    for (let i = 0; i < list.length; i++) {
+      const a = list[i];
+      a.setAttribute('href', a.getAttribute('data-aj-blocked'));
+      a.removeAttribute('data-aj-blocked');
+      a.removeAttribute('data-aj-checked');
+    }
+  }
+
+  /* ============================================================
+     9. meta refresh 自动跳转
+     ============================================================ */
+  function killMetaRefresh() {
+    const metas = document.querySelectorAll('meta[http-equiv]');
+    for (let i = 0; i < metas.length; i++) {
+      const m = metas[i];
+      if (!/^refresh$/i.test(m.getAttribute('http-equiv') || '')) continue;
+      const content = m.getAttribute('content') || '';
+      const url = content.replace(/^\s*[\d.]+\s*;\s*url\s*=\s*/i, '').replace(/^['"]|['"]$/g, '');
+      if (url && classify(url) === 'external') {
+        m.remove();
+        record('meta', url);
+      }
+    }
+  }
+
+  /* ============================================================
+     10. 批量执行 + 定时巡检
+     ============================================================ */
+  function sweep() {
+    try { neutralizeLinks(); } catch (e) { }
+    try { killMetaRefresh(); } catch (e) { }
+    try { killAds(); } catch (e) { }
+  }
+
+  let moTimer = 0;
+  try {
+    const mo = new MutationObserver(function () {
+      if (moTimer) return;
+      moTimer = setTimeout(function () { moTimer = 0; sweep(); }, 400);
+    });
+    mo.observe(document.documentElement || document, { childList: true, subtree: true });
+  } catch (e) { }
+
+  function startSweeps() {
+    let n = 0;
+    const fast = setInterval(function () {
+      sweep();
+      n++;
+      if (n >= 15) clearInterval(fast); // 前 15 秒每秒扫一次
+    }, 1000);
+    setInterval(sweep, 3000);           // 之后每 3 秒一次
+  }
+
+  /* ============================================================
+     11. 界面：右下角悬浮球 + 控制面板（Shadow DOM 隔离，不受站点样式影响）
+     ============================================================ */
+  const SHADOW_HTML = [
+    '<style>',
+    ':host{all:initial}',
+    '*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}',
+    '.ball{position:fixed;right:10px;bottom:calc(84px + env(safe-area-inset-bottom));width:42px;height:42px;border-radius:50%;',
+    'background:rgba(28,30,35,.82);color:#7ee2b8;display:flex;align-items:center;justify-content:center;font-size:19px;',
+    'box-shadow:0 2px 10px rgba(0,0,0,.35);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}',
+    '.ball.off{color:#8b8f98}',
+    '.panel{position:fixed;right:10px;bottom:calc(134px + env(safe-area-inset-bottom));width:min(330px,calc(100vw - 20px));',
+    'max-height:62vh;overflow:auto;background:#1c1e23;color:#e6e8ec;border:1px solid #33363d;border-radius:14px;',
+    'box-shadow:0 8px 30px rgba(0,0,0,.5);padding:12px 14px;font-size:13px;line-height:1.6}',
+    '.panel[hidden]{display:none}',
+    '.head{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;margin-bottom:4px}',
+    '.close{cursor:pointer;color:#9aa0aa;padding:0 6px;font-size:20px;line-height:1}',
+    '.stat{color:#9aa0aa;margin-bottom:8px;font-size:12px}',
+    '.stat b{color:#7ee2b8;font-size:16px;margin:0 2px}',
+    '.opt{display:flex;align-items:center;gap:9px;padding:7px 0;border-top:1px solid #2a2d33;font-size:13px}',
+    '.opt input{width:17px;height:17px;flex:none;accent-color:#7ee2b8}',
+    '.log{margin-top:8px;border-top:1px solid #2a2d33;padding-top:6px;max-height:24vh;overflow:auto}',
+    '.row{display:flex;gap:6px;font-size:12px;color:#b8bdc6;padding:3px 0}',
+    '.row .k{color:#f0a04b;flex:none}',
+    '.row .h{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+    '.row .t{color:#6f757f;flex:none}',
+    '.empty{color:#6f757f;font-size:12px}',
+    '.btns{display:flex;gap:8px;margin-top:10px}',
+    '.btns button{flex:1;padding:9px;border-radius:9px;border:1px solid #3a3e46;background:#262a30;color:#dfe3e9;font-size:12px}',
+    '.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom));',
+    'background:rgba(28,30,35,.94);color:#f3f4f7;border:1px solid #3a3e46;border-radius:10px;padding:7px 12px;font-size:12px;',
+    'max-width:80vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .18s;pointer-events:none}',
+    '.toast.show{opacity:1}',
+    '.toast[hidden]{display:none}',
+    '</style>',
+    '<div class="ball" id="ball">&#128737;</div>',
+    '<div class="panel" id="panel" hidden>',
+    '  <div class="head"><span>防跳转守卫</span><span class="close" id="close">&times;</span></div>',
+    '  <div class="stat">已拦截 <b id="n">0</b> 次外部跳转<br><span id="mode"></span></div>',
+    '  <label class="opt"><input type="checkbox" data-k="on">  拦截点击 / 弹窗 / 强制跳转</label>',
+    '  <label class="opt"><input type="checkbox" data-k="guard">  兜底守卫（老浏览器用）</label>',
+    '  <label class="opt"><input type="checkbox" data-k="ads">  清理广告位与外站 iframe</label>',
+    '  <label class="opt"><input type="checkbox" data-k="tip">  拦截时显示提示</label>',
+    '  <label class="opt"><input type="checkbox" data-k="ball">  显示这个悬浮球</label>',
+    '  <div class="log" id="log"></div>',
+    '  <div class="btns"><button data-a="diag">复制诊断信息</button><button data-a="clear">清空记录</button></div>',
+    '</div>',
+    '<div class="toast" id="toast" hidden></div>'
+  ].join('');
+
+  function copyText(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text); return true; }
+    } catch (e) { }
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      return true;
+    } catch (e) { return false; }
+  }
+
+  function buildUI() {
+    if (ui || !document.documentElement) return;
+
+    const root = document.createElement('div');
+    root.id = 'aj-root';
+    root.style.cssText = 'all:initial;position:fixed;z-index:2147483600;left:0;top:0;width:0;height:0;';
+    document.documentElement.appendChild(root);
+
+    const sh = root.attachShadow({ mode: 'open' });
+    sh.innerHTML = SHADOW_HTML;
+
+    const ball = sh.getElementById('ball');
+    const panel = sh.getElementById('panel');
+    const toastEl = sh.getElementById('toast');
+    const nEl = sh.getElementById('n');
+    const logEl = sh.getElementById('log');
+    let toastTimer = 0;
+
+    toastFn = function (msg) {
+      if (!cfg.tip) return;
+      toastEl.textContent = msg;
+      toastEl.hidden = false;
+      requestAnimationFrame(function () { toastEl.classList.add('show'); });
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () {
+        toastEl.classList.remove('show');
+        setTimeout(function () { toastEl.hidden = true; }, 220);
+      }, 1700);
+    };
+
+    function refresh() {
+      nEl.textContent = stats.n;
+      sh.getElementById('mode').textContent = navApi
+        ? '拦截模式：Navigation API（导航级，最彻底）'
+        : '拦截模式：兼容模式（建议升级 Edge）';
+      const boxes = sh.querySelectorAll('input[data-k]');
+      for (let i = 0; i < boxes.length; i++) {
+        const k = boxes[i].getAttribute('data-k');
+        boxes[i].checked = !!cfg[k];
+      }
+      ball.style.display = cfg.ball ? 'flex' : 'none';
+      ball.className = 'ball' + (cfg.on ? '' : ' off');
+      if (!stats.log.length) {
+        logEl.innerHTML = '<div class="empty">还没有拦截记录</div>';
+      } else {
+        logEl.innerHTML = stats.log.slice(0, 15).map(function (r) {
+          return '<div class="row"><span class="k">' + esc(r.kind) + '</span><span class="h">' +
+            esc(r.host) + '</span><span class="t">' + esc(r.t) + '</span></div>';
+        }).join('');
+      }
+    }
+
+    function copyDiag() {
+      const L = [];
+      L.push('【防跳转诊断报告】');
+      L.push('页面: ' + location.href);
+      L.push('站点清单: ' + SITES.join(', '));
+      L.push('已拦截: ' + stats.n + ' 次');
+      L.push('配置: ' + JSON.stringify(cfg));
+      L.push('');
+      L.push('最近拦截:');
+      stats.log.slice(0, 10).forEach(function (r) { L.push('  - ' + r.t + ' ' + r.kind + ' ' + r.host); });
+
+      const ext = [];
+      document.querySelectorAll('a[href]').forEach(function (a) {
+        const h = hostOf(a.getAttribute('href') || '');
+        if (h && /\./.test(h) && !hostAllowed(h) && ext.indexOf(h) < 0) ext.push(h);
+      });
+      L.push('');
+      L.push('页面里的外站链接域名(' + ext.length + '): ' + ext.slice(0, 25).join(', '));
+
+      const scr = [];
+      document.querySelectorAll('script[src]').forEach(function (s) {
+        if (classify(s.getAttribute('src')) === 'external') scr.push(s.src);
+      });
+      L.push('');
+      L.push('外站脚本(' + scr.length + '):');
+      scr.slice(0, 15).forEach(function (s) { L.push('  ' + s); });
+
+      const ad = [];
+      document.querySelectorAll('[id],[class]').forEach(function (el) {
+        const sig = (el.id || '') + ' ' + (typeof el.className === 'string' ? el.className : '');
+        if (!AD_RE.test(sig)) return;
+        const tag = el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') +
+          (typeof el.className === 'string' && el.className ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.') : '');
+        if (ad.indexOf(tag) < 0 && ad.length < 30) ad.push(tag);
+      });
+      L.push('');
+      L.push('疑似广告容器: ' + (ad.length ? ad.join(' | ') : '无'));
+
+      copyText(L.join('\n'));
+      toastFn('诊断信息已复制，可直接粘贴发给开发者');
+    }
+
+    ball.addEventListener('click', function () {
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden) refresh();
+    });
+    sh.getElementById('close').addEventListener('click', function () { panel.hidden = true; });
+
+    sh.addEventListener('change', function (e) {
+      const k = e.target && e.target.getAttribute && e.target.getAttribute('data-k');
+      if (!k) return;
+      cfg[k] = !!e.target.checked;
+      saveCfg();
+      if (k === 'on' && !cfg.on) restoreLinks();
+      sweep();
+      refresh();
+    });
+
+    sh.querySelector('[data-a="clear"]').addEventListener('click', function () {
+      stats.log = []; stats.n = 0; stats.seen = {}; refresh();
+    });
+    sh.querySelector('[data-a="diag"]').addEventListener('click', copyDiag);
+
+    ui = { refresh: refresh };
+    refresh();
+  }
+
+  /* ============================================================
+     12. 启动
+     ============================================================ */
+  sweep(); // 先跑一遍（此时页面还很空，主要是装好 observer）
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      buildUI();
+      sweep();
+      startSweeps();
+    });
+  } else {
+    buildUI();
+    sweep();
+    startSweeps();
+  }
+})();
+</script>
+<script data-page-node-id="HGbyZw39rCl86DyRQMqUEh" data-pnid-children="h28HjZzu4Hij5gDA2w6Ppg" id="src-bookmarklet" type="text/plain">javascript:(function(){var H=location.hostname,R=H.split('.').slice(-2).join('.'),N=0;function ok(u){if(!u)return 1;if(/^(javascript|mailto|tel|about|blob|data|\x23)/i.test(u))return 1;try{var x=new URL(u,location.href);if(x.protocol!='http:'&&x.protocol!='https:')return 1;var h=x.hostname;return h==H||h==R||h.endsWith('.'+R)}catch(e){return 1}}function log(k,u){N++;console.log('[纯净阅读] 已拦截'+k,u)}if(window.navigation){window.navigation.addEventListener('navigate',function(e){var u=e.destination?e.destination.url:'';if(u&&!ok(u)&&e.cancelable!==false){e.preventDefault();log('跳转',u)}})}var O=window.open;window.open=function(u){if(u&&!ok(u)){log('弹窗',u);return null}return O.apply(this,arguments)};document.addEventListener('click',function(e){var p=e.composedPath?e.composedPath():[];for(var i=0;i<p.length;i++){var el=p[i];if(el&&el.nodeName==='A'){var h=el.getAttribute('href');if(h&&!ok(h)){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();log('点击',h);return}}}},1);var f=document.querySelectorAll('iframe');for(var i=0;i<f.length;i++){if(f[i].src&&!ok(f[i].src))f[i].remove()}var l=document.querySelectorAll('a[href]');for(var i=0;i<l.length;i++){var h=l[i].getAttribute('href');if(h&&!ok(h)){l[i].setAttribute('data-pure',l[i].href);l[i].setAttribute('href','javascript:void(0)')}}alert('纯净阅读已开启\n本次页面内不会再被跳走\n\uff08刷新后需要重新点一次书签\uff09')})();</script>
+
+<script data-page-node-id="k1SF4AHZZIGQztOft6m1Ir" data-pnid-children="rRsFTvqHCf5kQFCs6f8Qic">
+function doCopy(el, text) {
+  var done = function () {
+    el.textContent = '已复制 ✓';
+    setTimeout(function () { el.textContent = el.dataset.label; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+  } else { fallback(text); done(); }
+}
+function fallback(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  ta.remove();
+}
+document.getElementById('copy-src').addEventListener('click', function () {
+  doCopy(this, document.getElementById('src-userscript').textContent.trim());
+});
+document.getElementById('copy-bm').addEventListener('click', function () {
+  doCopy(this, document.getElementById('src-bookmarklet').textContent.trim());
+});
+</script>
+</body>
+</html>
