@@ -1,11 +1,10 @@
 // ==UserScript==
 // @name         人人热书 · 防跳转纯净阅读
 // @namespace    https://local.antijump/
-// @version      1.1.0
+// @version      1.1.1
 // @description  拦截小说站的点击劫持、强制跳转、弹窗广告、外站 iframe 与跳 App 广告，只留下正文和翻页按钮。悬浮球面板里可直接管理保护站点。
 // @author       WorkBuddy
-// @match        *://renrenreshu.com/*
-// @match        *://*.renrenreshu.com/*
+// @match        *://*/*
 // @run-at       document-start
 // @noframes
 // @grant        none
@@ -19,6 +18,9 @@
  *   不管它用什么写法都能挡住，站点改版也不会失效。
  *
  * 换书站或加镜像站：点右下角盾牌 → 面板「保护站点」里直接添加域名（保存在本地，无需改代码）。
+ *
+ * 说明：脚本会在所有网站加载（@match 全站），但只有「保护站点」列表里的域名
+ * 才会真正启用防护；其他网站会在 1 毫秒内静默退出，不做任何事。
  */
 
 (function () {
