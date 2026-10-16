@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         人人热书 · 防跳转纯净阅读
 // @namespace    https://local.antijump/
-// @version      1.1.2
+// @version      1.1.3
 // @description  拦截小说站的点击劫持、强制跳转、弹窗广告、外站 iframe 与跳 App 广告，只留下正文和翻页按钮。悬浮球面板里可直接管理保护站点。
 // @author       WorkBuddy
 // @match        *://*/*
@@ -30,6 +30,8 @@
 
 (function () {
   'use strict';
+
+  try {
 
   /* ============================================================
      0. 站点清单
@@ -318,6 +320,7 @@
   const AD_RE = /(^|[^a-z])(ad|ads|adv|advert|advertise|banner|guanggao|gg|tuiguang|popup|floatad)([^a-z]|$)/i;
 
   function looksLikeAd(el) {
+    if (el.id && el.id.indexOf('aj-') === 0) return false; // 本脚本自己的元素，永不清理
     const sig = (el.id || '') + ' ' + (typeof el.className === 'string' ? el.className : '');
     if (!AD_RE.test(sig)) return false;
     if ((el.innerText || '').trim().length > 200) return false; // 有正文，别动
@@ -530,6 +533,16 @@
     const sh = root.attachShadow({ mode: 'open' });
     sh.innerHTML = SHADOW_HTML;
 
+    // 调试横幅（v1.1.3）：确认脚本已成功注入并加载，几秒后自动消失
+    try {
+      const dbg = document.createElement('div');
+      dbg.id = 'aj-debug-banner';
+      dbg.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);top:8px;z-index:2147483601;background:rgba(15,123,95,.92);color:#fff;font:12px/1.6 sans-serif;padding:6px 14px;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.35);pointer-events:none;transition:opacity .4s';
+      dbg.textContent = '🛡 防跳转脚本已加载 v1.1.3';
+      sh.appendChild(dbg);
+      setTimeout(function () { dbg.style.opacity = '0'; setTimeout(function () { if (dbg.parentNode) dbg.parentNode.removeChild(dbg); }, 500); }, 2500);
+    } catch (e) { }
+
     const ball = sh.getElementById('ball');
     const panel = sh.getElementById('panel');
     const toastEl = sh.getElementById('toast');
@@ -700,5 +713,16 @@
     buildUI();
     sweep();
     startSweeps();
+  }
+
+  } catch (err) {
+    // 任何未预料的错误都显示出来（这类脚本最怕"静默失败"，出问题时至少让你看见）
+    try {
+      const d = document.createElement('div');
+      d.style.cssText = 'position:fixed;left:8px;right:8px;bottom:10px;z-index:2147483647;background:#c62828;color:#fff;font:12px/1.7 sans-serif;padding:10px 12px;border-radius:10px;word-break:break-all;box-shadow:0 4px 16px rgba(0,0,0,.4)';
+      d.textContent = '🛡 防跳转脚本运行出错：' + (err && (err.message || err));
+      const host = document.body || document.documentElement;
+      if (host) host.appendChild(d);
+    } catch (e2) { }
   }
 })();
